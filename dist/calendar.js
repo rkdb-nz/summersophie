@@ -1,7 +1,9 @@
 (() => {
 'use strict';
 const puzzles=window.SOPHIE_PUZZLES;
-const preview=new URLSearchParams(location.search).get('preview')==='1';
+const params=new URLSearchParams(location.search);
+const showAnswers=params.get('answers')==='1';
+const preview=params.get('preview')==='1'||showAnswers;
 const key=preview?'summerSophiePreview2026':'summerSophie2026';
 let state={opened:[],solved:[]},activeDay=0,lastDoor;
 try{const saved=JSON.parse(localStorage.getItem(key));if(saved&&Array.isArray(saved.opened)&&Array.isArray(saved.solved))state={opened:saved.opened.filter(n=>Number.isInteger(n)&&n>=1&&n<=25),solved:saved.solved.filter(n=>Number.isInteger(n)&&n>=1&&n<=25)};}catch{}
@@ -34,6 +36,12 @@ document.getElementById('close').addEventListener('click',close);document.getEle
 modal.addEventListener('close',()=>{draw();calendar.children[lastDoor-1]?.querySelector('button').focus();});
 document.getElementById('answer-form').addEventListener('submit',event=>{event.preventDefault();if(activeDay>unlockedDay())return;const norm=s=>s.toLowerCase().trim().replace(/\s+/g,' ');const correct=puzzles[activeDay-1].answers.some(a=>norm(a)===norm(document.getElementById('answer').value));const feedback=document.getElementById('feedback');feedback.className=correct?'success':'wrong';feedback.textContent=correct?(activeDay===25?'Correct! Merry Christmas, Sophie. You found the treasure.':'Correct! Another little mystery unwrapped.'):'Not quite. Have another look — spelling counts.';if(correct){if(!state.solved.includes(activeDay))state.solved.push(activeDay);save();document.getElementById('answer-form').hidden=true;}});
 if(preview){const bar=document.createElement('div');bar.className='preview';const label=document.createElement('label');label.textContent='Calendar preview · simulate date:';label.style.display='inline';const select=document.createElement('select');select.setAttribute('aria-label','Simulated December date');for(let d=0;d<=25;d++){const o=document.createElement('option');o.value=d;o.textContent=d===0?'Before December':`${d} December`;o.selected=d===25;select.append(o);}select.addEventListener('change',()=>{previewDay=Number(select.value);draw();});label.append(select);bar.append(label);document.body.prepend(bar);}
+if(showAnswers){
+ const list=document.createElement('details');list.className='answer-list';list.style.cssText='max-width:1144px;margin:24px auto;padding:22px;background:#fffdf5;border:2px solid #aa492e;border-radius:4px;';
+ const summary=document.createElement('summary');summary.textContent='Host answer list — all 25 puzzles';summary.style.cssText='font-size:20px;font-weight:700;cursor:pointer;';list.append(summary);
+ const note=document.createElement('p');note.textContent='Host review copy. This list contains spoilers. Preview progress is separate from the normal calendar.';list.append(note);
+ const ol=document.createElement('ol');ol.style.cssText='line-height:1.8;padding-left:28px;';puzzles.forEach((p,i)=>{const li=document.createElement('li');const title=document.createElement('strong');title.textContent=p.title+': ';li.append(title,document.createTextNode(p.answers.join(' / ')));ol.append(li);});list.append(ol);list.open=true;document.querySelector('main').prepend(list);
+}
 draw();setInterval(draw,60000);
 window.SophieCalendar={unlockedDay};
 })();
