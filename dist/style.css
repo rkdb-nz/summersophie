@@ -116,3 +116,23 @@ body.fixed-calendar{height:100svh;height:100dvh;min-height:0;overflow:hidden;dis
 .rules-signoff{font-size:10px;letter-spacing:2px;font-weight:700;color:var(--rust);margin:24px 0 16px}
 .welcome-enter{margin-top:28px}
 @media(max-height:500px) and (min-width:500px){.welcome-enter{margin-top:0}.welcome-screen .intro{row-gap:14px}.welcome-screen h1{grid-row:2/4}}
+
+#house-rules{width:min(940px,calc(100% - 28px));padding:0}
+#house-rules[open]{display:grid;grid-template-columns:minmax(220px,.8fr) minmax(0,1.2fr)}
+.rules-photo{min-width:0;min-height:0;background:#315747;display:flex;align-items:center;justify-content:center}
+.rules-photo img{display:block;width:100%;height:100%;max-height:78dvh;object-fit:cover;object-position:center 32%}
+.rules-copy{min-width:0;padding:32px}
+#house-rules .rules-copy .eyebrow{font-size:9px;letter-spacing:1.5px;margin-top:0}
+@media(max-width:600px){
+ #house-rules[open]{grid-template-columns:1fr}
+ .rules-photo{height:25dvh;min-height:120px}
+ .rules-photo img{width:100%;height:100%;object-position:center 28%}
+ .rules-copy{padding:24px}
+}
+@media(max-height:500px) and (min-width:601px){
+ #house-rules[open]{grid-template-columns:minmax(170px,.7fr) minmax(0,1.3fr)}
+ .rules-photo{position:sticky;top:0;height:84dvh}
+ .rules-photo img{height:100%;max-height:none}
+ .rules-copy{padding:22px}
+ #house-rules h2{font-size:25px}
+}
