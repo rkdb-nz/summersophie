@@ -108,3 +108,11 @@ body.fixed-calendar{height:100svh;height:100dvh;min-height:0;overflow:hidden;dis
  .fixed-calendar .host-door-answer{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
  .fixed-calendar.host-review .door .number{font-size:22px;bottom:6px}
 }
+
+#house-rules{width:min(620px,calc(100% - 28px));font-size:15px;line-height:1.6}
+#house-rules h2{font-size:clamp(24px,4vw,33px);line-height:1.2}
+#house-rules h3{font:600 23px 'Playfair Display',serif;margin:22px 0 12px}
+.house-rules-list{padding-left:22px}.house-rules-list li{padding-left:4px;margin:12px 0}
+.rules-signoff{font-size:10px;letter-spacing:2px;font-weight:700;color:var(--rust);margin:24px 0 16px}
+.welcome-enter{margin-top:28px}
+@media(max-height:500px) and (min-width:500px){.welcome-enter{margin-top:0}.welcome-screen .intro{row-gap:14px}.welcome-screen h1{grid-row:2/4}}

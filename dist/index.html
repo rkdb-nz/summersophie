@@ -13,7 +13,6 @@
 <div class="intro"><p class="eyebrow">MADE ESPECIALLY FOR SOPHIE</p><h1 id="welcome-title" tabindex="-1">A summer of<br><em>little mysteries.</em></h1>
 <p class="description">Twenty-five doors. Twenty-five puzzles.<br>A little something to unwrap each day.</p>
 <p class="welcome-dates">1—25 DECEMBER 2026</p>
-<section class="rules"><h2>A few house rules</h2><p>Google is allowed. People are allowed. AI sits this one out.<br>Bring your curiosity. Spelling still counts.</p></section>
 <button id="enter-calendar" class="submit welcome-enter" type="button">Open my calendar →</button>
 </div>
 </section>
@@ -27,5 +26,19 @@
 <dialog id="puzzle" aria-labelledby="puzzle-title"><button class="close" id="close" aria-label="Close puzzle">×</button><p class="eyebrow" id="day-label"></p><h2 id="puzzle-title"></h2><div id="question"></div>
 <form id="answer-form"><label for="answer">Your answer</label><div class="answer-row"><input id="answer" autocomplete="off" required><button class="submit">Try it →</button></div></form>
 <p id="feedback" role="status" aria-live="polite"></p><button id="back" class="back" type="button">Back to the calendar</button></dialog>
+<dialog id="house-rules" aria-labelledby="rules-title">
+<p class="eyebrow">A SMALL ADMINISTRATIVE INTERRUPTION…</p>
+<h2 id="rules-title">You’re doing wonderfully.<br>Also, I no longer trust you.</h2>
+<p>Perhaps now would be a good time to outline a few… <strong>restrictions.</strong></p>
+<h3>House rules</h3>
+<ol class="house-rules-list">
+<li><strong>Google is allowed.</strong></li>
+<li><strong>AI is not.</strong> No screenshots, photos, or clue-dumping.</li>
+<li><strong>People are allowed.</strong> Asking around is fair game.</li>
+<li><strong>Use your sleuth skills.</strong> Investigate the mystery, but don’t outsource it.</li>
+</ol>
+<p class="rules-signoff">RULES ARE FUN!</p>
+<button id="rules-continue" class="submit" type="button">Yes they are! →</button>
+</dialog>
 <script src="puzzles.js"></script><script src="calendar.js"></script>
 </body></html>

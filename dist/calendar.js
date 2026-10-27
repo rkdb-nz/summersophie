@@ -12,11 +12,11 @@ function enterCalendar(remember=true){
  welcomeScreen.hidden=true;calendarScreen.hidden=false;document.body.classList.add('calendar-visible');
  document.getElementById('calendar-title').focus({preventScroll:true});
 }
-document.getElementById('enter-calendar').addEventListener('click',()=>enterCalendar());
+document.getElementById('enter-calendar').addEventListener('click',()=>{enterCalendar();showRulesIfPending();});
 try{if(localStorage.getItem(welcomeKey)==='seen')enterCalendar(false);}catch{}
 const key=preview?'summerSophiePreview2026':'summerSophie2026';
-let state={opened:[],solved:[]},activeDay=0,lastDoor;
-try{const saved=JSON.parse(localStorage.getItem(key));if(saved&&Array.isArray(saved.opened)&&Array.isArray(saved.solved))state={opened:saved.opened.filter(n=>Number.isInteger(n)&&n>=1&&n<=25),solved:saved.solved.filter(n=>Number.isInteger(n)&&n>=1&&n<=25)};}catch{}
+let state={opened:[],solved:[],rulesAccepted:false},activeDay=0,lastDoor;
+try{const saved=JSON.parse(localStorage.getItem(key));if(saved&&Array.isArray(saved.opened)&&Array.isArray(saved.solved))state={opened:saved.opened.filter(n=>Number.isInteger(n)&&n>=1&&n<=25),solved:saved.solved.filter(n=>Number.isInteger(n)&&n>=1&&n<=25),rulesAccepted:saved.rulesAccepted===true};}catch{}
 const preparationKey='summerSophiePreparation2026';
 let ready=[];
 try { const saved=JSON.parse(localStorage.getItem(preparationKey)); if(Array.isArray(saved)) ready=[...new Set(saved.filter(n=>Number.isInteger(n)&&n>=1&&n<=25))]; } catch {}
@@ -51,10 +51,21 @@ function draw(){
  }
 }
 function show(day){if(day>unlockedDay())return;activeDay=day;const p=puzzles[day-1];document.getElementById('day-label').textContent=`${day} DECEMBER · ${day===25?'THE FINALE':'YOUR DAILY MYSTERY'}`;document.getElementById('puzzle-title').textContent=p.title;const q=document.getElementById('question');q.textContent=p.question;if(p.image){const img=document.createElement('img');img.src='assets/'+p.image;img.alt=p.alt;q.append(img);}document.getElementById('answer').value='';const done=state.solved.includes(day);document.getElementById('feedback').textContent=done?'Already solved. Nicely done, Sophie.':'';document.getElementById('feedback').className='success';document.getElementById('answer-form').hidden=done;if(showAnswers){const hint=document.createElement('span');hint.className='host-inline-answer';hint.textContent=' — '+p.answers[0];document.getElementById('day-label').append(hint);updateReadyButton();}modal.showModal();if(!done)document.getElementById('answer').focus();}
+const houseRules=document.getElementById('house-rules');
+function showRulesIfPending(){
+ if(!state.solved.includes(1)||state.rulesAccepted||houseRules.open)return;
+ if(modal.open)modal.close();
+ houseRules.showModal();
+}
+houseRules.addEventListener('cancel',event=>event.preventDefault());
+document.getElementById('rules-continue').addEventListener('click',()=>{
+ state.rulesAccepted=true;save();houseRules.close();draw();
+ calendar.children[0]?.querySelector('button').focus({preventScroll:true});
+});
 function close(){modal.close();}
 document.getElementById('close').addEventListener('click',close);document.getElementById('back').addEventListener('click',close);
-modal.addEventListener('close',()=>{draw();calendar.children[lastDoor-1]?.querySelector('button').focus();});
-document.getElementById('answer-form').addEventListener('submit',event=>{event.preventDefault();if(activeDay>unlockedDay())return;const norm=s=>s.toLowerCase().trim().replace(/\s+/g,' ');const correct=puzzles[activeDay-1].answers.some(a=>norm(a)===norm(document.getElementById('answer').value));const feedback=document.getElementById('feedback');feedback.className=correct?'success':'wrong';feedback.textContent=correct?(activeDay===25?'Correct! Merry Christmas, Sophie. You found the treasure.':'Correct! Another little mystery unwrapped.'):'Not quite. Have another look — spelling counts.';if(correct){if(!state.solved.includes(activeDay))state.solved.push(activeDay);save();document.getElementById('answer-form').hidden=true;}});
+modal.addEventListener('close',()=>{draw();if(!houseRules.open)calendar.children[lastDoor-1]?.querySelector('button').focus();});
+document.getElementById('answer-form').addEventListener('submit',event=>{event.preventDefault();if(activeDay>unlockedDay())return;const norm=s=>s.toLowerCase().trim().replace(/\s+/g,' ');const correct=puzzles[activeDay-1].answers.some(a=>norm(a)===norm(document.getElementById('answer').value));const feedback=document.getElementById('feedback');feedback.className=correct?'success':'wrong';feedback.textContent=correct?(activeDay===25?'Correct! Merry Christmas, Sophie. You found the treasure.':'Correct! Another little mystery unwrapped.'):'Not quite. Have another look — spelling counts.';if(correct){if(!state.solved.includes(activeDay))state.solved.push(activeDay);save();document.getElementById('answer-form').hidden=true;if(activeDay===1)showRulesIfPending();}});
 if(preview){const bar=document.createElement('div');bar.className='preview';const label=document.createElement('label');label.textContent='Calendar preview · simulate date:';label.style.display='inline';const select=document.createElement('select');select.setAttribute('aria-label','Simulated December date');for(let d=0;d<=25;d++){const o=document.createElement('option');o.value=d;o.textContent=d===0?'Before December':`${d} December`;o.selected=d===25;select.append(o);}select.addEventListener('change',()=>{previewDay=Number(select.value);draw();});label.append(select);bar.append(label);document.body.prepend(bar);}
 function drawPreparation(){
  const rail=document.getElementById('preparation-rail');if(!rail)return;
@@ -83,6 +94,6 @@ if(showAnswers){
  });document.getElementById('back').before(button);
 }
 
-draw();setInterval(draw,60000);
+draw();if(welcomeScreen.hidden)showRulesIfPending();setInterval(draw,60000);
 window.SophieCalendar={unlockedDay};
 })();
