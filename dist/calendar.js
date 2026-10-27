@@ -4,6 +4,16 @@ const puzzles=window.SOPHIE_PUZZLES;
 const params=new URLSearchParams(location.search);
 const showAnswers=params.get('answers')==='1';
 const preview=params.get('preview')==='1'||showAnswers;
+const welcomeKey='summerSophieWelcome2026';
+const welcomeScreen=document.getElementById('welcome-screen');
+const calendarScreen=document.getElementById('calendar-screen');
+function enterCalendar(remember=true){
+ if(remember){try{localStorage.setItem(welcomeKey,'seen');}catch{}}
+ welcomeScreen.hidden=true;calendarScreen.hidden=false;document.body.classList.add('calendar-visible');
+ document.getElementById('calendar-title').focus({preventScroll:true});
+}
+document.getElementById('enter-calendar').addEventListener('click',()=>enterCalendar());
+try{if(localStorage.getItem(welcomeKey)==='seen')enterCalendar(false);}catch{}
 const key=preview?'summerSophiePreview2026':'summerSophie2026';
 let state={opened:[],solved:[]},activeDay=0,lastDoor;
 try{const saved=JSON.parse(localStorage.getItem(key));if(saved&&Array.isArray(saved.opened)&&Array.isArray(saved.solved))state={opened:saved.opened.filter(n=>Number.isInteger(n)&&n>=1&&n<=25),solved:saved.solved.filter(n=>Number.isInteger(n)&&n>=1&&n<=25)};}catch{}

@@ -13,3 +13,98 @@
 .mark-ready[aria-pressed="true"]{background:#b52e2b0b}.host-review .meta #progress{display:none}
 @media(max-width:1300px){body.has-preparation-rail>header,body.has-preparation-rail>main,body.has-preparation-rail>footer{margin-right:52px}}
 @media(max-width:650px){.host-door-answer{font-size:9px;top:4px;left:3px;right:3px;padding:3px;flex-wrap:wrap;gap:0}.host-review .door{min-height:110px}.host-review .door .ornament{display:none}.host-review .door .number{margin-top:24px;font-size:24px}.host-review .door .door-label{bottom:10%}.has-preparation-rail .calendar-wrap{padding-left:8px;padding-right:8px}.has-preparation-rail .calendar{gap:6px}.preparation-rail{right:3px;width:38px}}
+
+/* One welcome visit, then a calendar that fits the available viewport. */
+[hidden]{display:none!important}
+html{height:100%;overflow:hidden}
+body.fixed-calendar{height:100svh;height:100dvh;min-height:0;overflow:hidden;display:flex;flex-direction:column}
+.fixed-calendar>header,.fixed-calendar>footer{width:100%;flex:none;padding:14px 32px;max-width:1240px}
+.fixed-calendar>header{min-height:54px}.fixed-calendar>header .brand{font-size:26px}
+.fixed-calendar>footer{padding-top:10px;padding-bottom:10px}
+.fixed-calendar>main{width:100%;flex:1;min-height:0;display:flex;flex-direction:column;padding:16px 32px;max-width:1240px;overflow:hidden}
+.welcome-screen{flex:1;min-height:0;display:grid;place-items:center;overflow:auto;padding:12px}
+.welcome-screen .intro{max-width:680px}
+.welcome-screen .eyebrow{margin:0 0 20px}
+.welcome-screen h1{font-size:clamp(36px,6.4vh,70px);margin:0 0 20px}
+.welcome-screen .description{margin:0;line-height:1.7}
+.welcome-dates{font-size:10px;letter-spacing:2px;font-weight:700;margin:24px 0 0}
+.welcome-screen .rules{padding:12px 0 16px}
+.welcome-screen .rules h2{font-size:20px;margin:10px 0}.welcome-screen .rules p{margin:0}
+.welcome-enter{min-height:46px;padding:14px 26px}
+.fixed-calendar .calendar-wrap{width:100%;flex:1;min-height:0;display:flex;flex-direction:column;padding:18px 22px 10px}
+.fixed-calendar .calendar-heading{flex:none;min-height:32px;gap:12px}
+.fixed-calendar .calendar-heading h2{font-size:26px}.fixed-calendar .calendar-heading span{white-space:nowrap}
+.fixed-calendar .calendar-note{flex:none;line-height:1.4;margin:6px 0 12px}
+.fixed-calendar .calendar{flex:1;min-height:0;grid-template-columns:repeat(5,minmax(0,1fr));grid-template-rows:repeat(5,minmax(0,1fr));gap:clamp(6px,1.3vh,14px)}
+.fixed-calendar .door,.fixed-calendar.host-review .door{aspect-ratio:auto;min-height:0;min-width:0}
+.fixed-calendar .door .number{font-size:clamp(22px,4vh,40px);margin:0}
+.fixed-calendar .door .ornament{top:14%;font-size:10px}.fixed-calendar .door .door-label{bottom:12%;font-size:8px}
+.fixed-calendar .door-face:before{inset:7px}.fixed-calendar .door-face:after{right:12px}
+.fixed-calendar .inside{inset:5px;font-size:8px;gap:3px}.fixed-calendar .inside strong{font-size:22px}
+.fixed-calendar .footnote{flex:none;margin:10px 0 0;font-size:10px}
+.fixed-calendar>.preview{flex:none;padding:7px 12px;line-height:1.2}
+.fixed-calendar>.preview select{padding:3px;font-size:11px}
+.fixed-calendar>.preview label{font-size:11px;margin:0}
+.fixed-calendar .preparation-rail{top:8px;bottom:8px;transform:none;max-height:none;overflow:hidden;gap:0;justify-content:space-between}
+.fixed-calendar .preparation-rail button{min-height:0;flex:1;max-height:25px;line-height:1;padding:0;font-size:12px}
+.fixed-calendar .preparation-label{flex:none;margin-bottom:4px}
+.fixed-calendar:not(.calendar-visible)>.preparation-rail{display:none}
+.fixed-calendar.has-preparation-rail>header,.fixed-calendar.has-preparation-rail>main,.fixed-calendar.has-preparation-rail>footer{width:calc(100% - 52px);margin-right:52px}
+.fixed-calendar .host-door-answer{font-size:clamp(9px,1.45vh,12px);padding:3px 5px;top:5px;left:5px;right:5px}
+.fixed-calendar.host-review .door .number{padding-top:18px}
+.fixed-calendar.host-review .door .ornament{display:none}
+.fixed-calendar.host-review .calendar-heading #progress{display:none}
+@media(max-width:650px){
+ .fixed-calendar>header,.fixed-calendar>footer{padding-left:14px;padding-right:14px}
+ .fixed-calendar>header{min-height:48px;padding-top:9px;padding-bottom:9px}
+ .fixed-calendar>main{padding:8px 10px}
+ .fixed-calendar .calendar-wrap{padding:12px 9px 8px}
+ .fixed-calendar .calendar-heading h2{font-size:23px}
+ .fixed-calendar .calendar-heading span{display:inline;font-size:9px;letter-spacing:.5px}
+ .fixed-calendar .calendar-note{font-size:10px;margin-bottom:9px}
+ .fixed-calendar .calendar{gap:6px}
+ .fixed-calendar .door-face:before{inset:4px}.fixed-calendar .door-face:after{right:6px}
+ .fixed-calendar .door .door-label{font-size:6px;letter-spacing:.5px}
+ .fixed-calendar .door .number{font-size:26px}
+ .fixed-calendar .door .ornament{font-size:8px}
+ .fixed-calendar .host-door-answer{font-size:9px;line-height:1.2;padding:2px;top:3px;left:2px;right:2px}
+ .fixed-calendar.host-review .door .number{font-size:23px;padding-top:26px}
+ .fixed-calendar .footnote{font-size:8px;margin-top:8px}
+ .fixed-calendar>footer{font-size:8px;padding-top:7px;padding-bottom:7px}
+ .fixed-calendar .welcome-screen{padding:8px}
+ .welcome-screen .eyebrow{font-size:9px}.welcome-screen .rules p{font-size:11px}
+}
+@media(max-height:500px) and (min-width:500px){
+ .fixed-calendar>header{min-height:34px;padding-top:5px;padding-bottom:5px}
+ .fixed-calendar>header .brand{font-size:21px}
+ .fixed-calendar>main{padding:6px 14px}
+ .fixed-calendar>footer{padding-top:4px;padding-bottom:4px;font-size:8px}
+ .fixed-calendar .calendar-wrap{padding:8px 10px 5px}
+ .fixed-calendar .calendar-heading{min-height:22px}
+ .fixed-calendar .calendar-heading h2{font-size:21px}
+ .fixed-calendar .calendar-note{font-size:9px;margin:2px 0 6px}
+ .fixed-calendar .calendar{grid-template-columns:repeat(9,minmax(0,1fr));grid-template-rows:repeat(3,minmax(0,1fr));gap:6px}
+ .fixed-calendar .door .number{font-size:24px}
+ .fixed-calendar .door .ornament{display:none}
+ .fixed-calendar .door .door-label{font-size:6px;bottom:7%}
+ .fixed-calendar .footnote{font-size:8px;margin-top:5px}
+ .fixed-calendar .host-door-answer{font-size:8px;top:2px;padding:1px;line-height:1.1}
+ .fixed-calendar.host-review .door .number{font-size:20px;padding-top:18px}
+ .fixed-calendar>.preview{padding:4px 8px}
+ .fixed-calendar .preparation-rail button{font-size:9px}
+ .fixed-calendar .preparation-label{font-size:6px}
+ .welcome-screen .intro{display:grid;grid-template-columns:1fr 1fr;gap:8px 24px;align-items:center;max-width:700px}
+ .welcome-screen .eyebrow{grid-column:1/-1;margin:0}
+ .welcome-screen h1{font-size:36px;grid-row:2/5;margin:0}
+ .welcome-screen .description{font-size:12px}
+ .welcome-screen .welcome-dates{margin:0;font-size:8px}
+ .welcome-screen .rules{padding:0}.welcome-screen .rules h2{font-size:16px;margin:0 0 5px}.welcome-screen .rules p{font-size:10px}
+ .welcome-enter{grid-column:2;min-height:36px;padding:9px 16px;font-size:12px}
+}
+
+.fixed-calendar.host-review .door .door-label{display:none}
+.fixed-calendar.host-review .door .number{position:absolute;bottom:6px;padding:0;font-size:clamp(18px,3.6vh,32px);line-height:1}
+@media(max-width:650px),(max-height:500px){
+ .fixed-calendar .host-door-answer{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+ .fixed-calendar.host-review .door .number{font-size:22px;bottom:6px}
+}

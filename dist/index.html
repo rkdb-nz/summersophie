@@ -1,3 +1,31 @@
 <!doctype html>
-<html lang="en-NZ"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Twenty-five little doors. A December of puzzles for Sophie."><title>SummerSophie · Advent Quiz</title><link rel="stylesheet" href="style.css"></head>
-<body><div class="sun" aria-hidden="true"></div><header><a class="brand" href="./">SS<span>DECEMBER 2026</span></a><span class="edition">A little Christmas curiosity</span></header><main><section class="intro"><p class="eyebrow">MADE ESPECIALLY FOR SOPHIE</p><h1>A summer of<br><em>little mysteries.</em></h1><p class="description">Twenty-five doors. Twenty-five puzzles.<br>A little something to unwrap each day.</p><div class="meta"><span>1—25 DECEMBER</span><span id="progress">0 / 25 solved</span></div></section><section class="calendar-wrap" aria-label="Advent calendar"><div class="calendar-heading"><h2>SummerSophie</h2><span>OPEN A LITTLE WONDER</span></div><p id="status" class="calendar-note"></p><div id="calendar" class="calendar"></div><p class="footnote">Doors open at midnight, New Zealand time. Missed a day? Your earlier doors will wait.</p></section><section class="rules"><h2>A few house rules</h2><p>Google is allowed. People are allowed. AI sits this one out.<br>Bring your curiosity. Spelling still counts.</p></section></main><footer>SUMMERSOPHIE <span>25 days of “just one more clue…”</span></footer><dialog id="puzzle" aria-labelledby="puzzle-title"><button class="close" id="close" aria-label="Close puzzle">×</button><p class="eyebrow" id="day-label"></p><h2 id="puzzle-title"></h2><div id="question"></div><form id="answer-form"><label for="answer">Your answer</label><div class="answer-row"><input id="answer" autocomplete="off" required><button class="submit">Try it →</button></div></form><p id="feedback" role="status" aria-live="polite"></p><button id="back" class="back" type="button">Back to the calendar</button></dialog><script src="puzzles.js"></script><script src="calendar.js"></script></body></html>
+<html lang="en-NZ">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Twenty-five little doors. A December of puzzles for Sophie.">
+<title>SummerSophie · Advent Quiz</title><link rel="stylesheet" href="style.css">
+</head>
+<body class="fixed-calendar">
+<div class="sun" aria-hidden="true"></div>
+<header><a class="brand" href="./">SS<span>DECEMBER 2026</span></a><span class="edition">A little Christmas curiosity</span></header>
+<main>
+<section id="welcome-screen" class="welcome-screen" aria-labelledby="welcome-title">
+<div class="intro"><p class="eyebrow">MADE ESPECIALLY FOR SOPHIE</p><h1 id="welcome-title" tabindex="-1">A summer of<br><em>little mysteries.</em></h1>
+<p class="description">Twenty-five doors. Twenty-five puzzles.<br>A little something to unwrap each day.</p>
+<p class="welcome-dates">1—25 DECEMBER 2026</p>
+<section class="rules"><h2>A few house rules</h2><p>Google is allowed. People are allowed. AI sits this one out.<br>Bring your curiosity. Spelling still counts.</p></section>
+<button id="enter-calendar" class="submit welcome-enter" type="button">Open my calendar →</button>
+</div>
+</section>
+<section id="calendar-screen" class="calendar-wrap" aria-label="Advent calendar" hidden>
+<div class="calendar-heading"><h2 tabindex="-1" id="calendar-title">SummerSophie</h2><span id="progress">0 / 25 solved</span></div>
+<p id="status" class="calendar-note" aria-live="polite"></p><div id="calendar" class="calendar"></div>
+<p class="footnote">A door a day, 1–25 December · New Zealand time</p>
+</section>
+</main>
+<footer>SUMMERSOPHIE <span>25 days of “just one more clue…”</span></footer>
+<dialog id="puzzle" aria-labelledby="puzzle-title"><button class="close" id="close" aria-label="Close puzzle">×</button><p class="eyebrow" id="day-label"></p><h2 id="puzzle-title"></h2><div id="question"></div>
+<form id="answer-form"><label for="answer">Your answer</label><div class="answer-row"><input id="answer" autocomplete="off" required><button class="submit">Try it →</button></div></form>
+<p id="feedback" role="status" aria-live="polite"></p><button id="back" class="back" type="button">Back to the calendar</button></dialog>
+<script src="puzzles.js"></script><script src="calendar.js"></script>
+</body></html>
